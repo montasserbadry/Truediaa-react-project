@@ -1,25 +1,36 @@
-import logo from './logo.svg';
+import React from 'react';
+import {  BrowserRouter as Router,Route ,Routes} from 'react-router-dom';
 import './App.css';
-
+import Contact from './components/Contact/contact';
+import Home from './components/Home/Home';
+import { AuthProvider } from './components/Login/ِAuthContext';
+import Navbar from './components/Navbar/Navbar';
+import About from './components/About/About';
+import Form from './components/Form/Form';
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app" dir='rtl'>
+      <Navbar />
+<div className='content'>
+        <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+                <Route path="/form" element={<Form />} />
+
+        </Routes>
+        </div>
+      </div>
+      </Router>
   );
 }
-
-export default App;
+function AppWithStore() {
+  return (
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  )
+}
+export default AppWithStore;
